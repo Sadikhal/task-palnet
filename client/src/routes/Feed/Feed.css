@@ -1,6 +1,6 @@
-/* Feed.css */
-.feed-root{ max-width:800px; margin:0 auto; padding-bottom:80px;   font-family: "Lato", sans-serif;
-background: #fff;
+.feed-root{
+   max-width:800px; margin:0 auto; padding-bottom:80px;   font-family: "Lato", sans-serif;
+   background: #fff;
 }
 .feed-header{
   display:flex;
@@ -8,10 +8,18 @@ background: #fff;
   justify-content:space-between;
   padding:18px 16px;
 }
-.feed-header h2{ margin:0; font-size:22px; }
-.header-icons{ display:flex; gap:12px; align-items:center; }
-.badge{ background:#fff6ea; color:#f57c00; padding:6px 10px; border-radius:14px; font-weight:700; }
-.balance{ background:#e9f6ef; color:#0a7a2f; padding:6px 10px; border-radius:14px; }
+.feed-header h2{
+   margin:0; font-size:22px; 
+  }
+.header-icons{
+   display:flex; gap:12px; align-items:center; 
+  }
+.badge{
+   background:#fff6ea; color:#f57c00; padding:6px 10px; border-radius:14px; font-weight:700; 
+  }
+.balance{
+   background:#e9f6ef; color:#0a7a2f; padding:6px 10px; border-radius:14px; 
+  }
 .feed-loading, .feed-error {
   margin: 16px;
   padding: 12px;
@@ -19,5 +27,30 @@ background: #fff;
   color:#856404;
   border-radius:10px;
 }
-.posts-list{ margin-top:10px; }
-.no-posts{ margin:18px; color:#777; text-align:center; }
+.profile{
+  background:#eae4e4;
+  border-radius:18px;
+  box-shadow: #e9f6ef;
+  padding: 4px 10px;
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+  border: 1px solid #fff3cd;
+}
+.name{
+  font-size: 12px;
+}
+.profile-icon{
+color: #007bff;
+width: 16px;
+height: 16px;
+cursor: pointer;
+
+}
+.posts-list{
+   margin-top:10px; 
+  }
+.no-posts{
+   margin:18px; color:#777; text-align:center; 
+  }

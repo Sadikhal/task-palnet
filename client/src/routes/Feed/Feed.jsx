@@ -1,4 +1,3 @@
-// src/pages/Feed/Feed.jsx
 import  { useEffect, useState, useContext } from "react";
 import CreatePost from "../../components/CreatePost/CreatePost";
 import PostCard from "../../components/PostCard/PostCard";
@@ -6,6 +5,7 @@ import { AuthContext } from "../../context/AuthContext";
 import toast from "react-hot-toast";
 import "./Feed.css";
 import api from "../../lib/apiRequest";
+import { LuUserRound } from "react-icons/lu";
 
 const Feed = () => {
   const { user } = useContext(AuthContext);
@@ -33,7 +33,6 @@ const Feed = () => {
   }, []);
 
   const handleNewPost = (newPost) => {
-    // Add newly created post at top (optimistic)
     setPosts((p) => [newPost, ...p]);
   };
 
@@ -41,7 +40,6 @@ const Feed = () => {
     setPosts((prev) =>
       prev.map((p) => (p._id === postId ? { ...p, likes: Array(likesCount).fill("x") } : p))
     );
-    // Note: backend returns count; we update only UI count in PostCard via setLikesCount
   };
 
   const handleAddComment = (postId, comments) => {
@@ -57,8 +55,12 @@ const Feed = () => {
         <div className="header-icons">
           <div className="badge">57</div>
           <div className="balance">₹0.00</div>
-          <div className="bell">🔔</div>
-          <div className="profile"> {/* placeholder */} </div>
+          <div className="profile">
+            <LuUserRound className="profile-icon"/>
+            <span className="name">
+            {user.name}
+          </span>
+          </div>
         </div>
       </div>
 

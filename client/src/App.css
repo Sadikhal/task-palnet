@@ -1,0 +1,9 @@
+.center-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: "Lato", sans-serif;
+  color: #1976d2;
+  font-weight: 600;
+}

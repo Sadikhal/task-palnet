@@ -1,31 +1,72 @@
-import React, { useState, useContext } from "react";
-import { AuthContext } from "../../context/AuthContext";
+import { useState } from "react";
 import toast from "react-hot-toast";
 import "./CreatePost.css";
 import api from "../../lib/apiRequest";
 import { HiOutlineCamera } from "react-icons/hi";
+import { uploadFileToCloudinary } from "../../lib/uploadFile";
+import { IoSendSharp } from "react-icons/io5";
 
 const CreatePost = ({ onPostCreated }) => {
-  const { user } = useContext(AuthContext);
   const [text, setText] = useState("");
-  const [image, setImage] = useState("");
+  const [imageUrl, setImageUrl] = useState(""); URL
+  const [file, setFile] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  const handleFileChange = (e) => {
+    const img = e.target.files?.[0];
+    if (!img) return;
+    if (!img.type.startsWith("image/")) {
+      toast.error("Please choose an image file");
+      return;
+    }
+    if (img.size > 5 * 1024 * 1024) {
+      toast.error("Max file size is 5MB");
+      return;
+    }
+    setFile(img);
+    setImageUrl(URL.createObjectURL(img));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    if (!text.trim() && !image.trim()) {
-      setError("Please add text or image URL.");
+
+    if (!text.trim() && !imageUrl && !file) {
+      setError("Please add text or image.");
       return;
     }
+
     setLoading(true);
+
     try {
-      const payload = { text: text.trim(), image: image.trim() };
+      let finalImageUrl = imageUrl && !file ? imageUrl : "";
+      if (file) {
+        setUploading(true);
+        toast.loading("Uploading image...");
+        try {
+          const uploadedUrl = await uploadFileToCloudinary(file, setUploadProgress);
+          finalImageUrl = uploadedUrl;
+          toast.dismiss();
+          toast.success("Image uploaded");
+        } catch (err) {
+          toast.dismiss();
+          setError("Image upload failed");
+          setUploading(false);
+          setLoading(false);
+          return;
+        }
+        setUploading(false);
+      }
+
+      const payload = { text: text.trim(), image: finalImageUrl };
       const res = await api.post("/posts", payload);
       toast.success("Post created");
       setText("");
-      setImage("");
+      setImageUrl("");
+      setFile(null);
       if (onPostCreated) onPostCreated(res.data.post);
     } catch (err) {
       const msg = err.response?.data?.message || "Failed to create post";
@@ -34,6 +75,11 @@ const CreatePost = ({ onPostCreated }) => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleRemoveFile = () => {
+    setFile(null);
+    setImageUrl("");
   };
 
   return (
@@ -54,24 +100,69 @@ const CreatePost = ({ onPostCreated }) => {
           onChange={(e) => setText(e.target.value)}
           rows={3}
         />
+
         <div className="create-bottom">
           <div className="photo-wrap">
-            <label className="photo-label"><HiOutlineCamera className="camera"/>
-             <span className="photo">
-              Photo
-              </span>
-             </label>
+            <label htmlFor="file-input" className="photo-label">
+              <HiOutlineCamera className="camera" />
+              <span className="photo">Photo</span>
+            </label>
+
             <input
-              className="photo-input"
-              placeholder="Image URL (optional)"
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
+              id="file-input"
+              type="file"
+              accept="image/*"
+              onChange={handleFileChange}
+              style={{ display: "none" }}
             />
           </div>
-          <button className="post-btn" type="submit" disabled={loading}>
-            {loading ? "Posting..." : "Post ▶"}
+
+          <button
+            className="post-btn"
+            type="submit"
+            disabled={loading || uploading}
+          >
+            {loading ? (
+              "Posting..."
+            ) : uploading ? (
+              `Uploading ${uploadProgress}%`
+            ) : (
+              <>
+                <IoSendSharp style={{ marginRight: "6px" }} /> Post
+              </>
+            )}
           </button>
         </div>
+
+        {file && (
+          <div className="upload-preview">
+            <div className="preview-left">
+              <img
+                src={URL.createObjectURL(file)}
+                alt="preview"
+                className="preview-img"
+              />
+            </div>
+            <div className="preview-right">
+              <div className="preview-info">
+                <div>{file.name}</div>
+                <div
+                  style={{ fontSize: 12, color: "#888" }}
+                >
+                  {(file.size / 1024 / 1024).toFixed(2)} MB
+                </div>
+              </div>
+              <button
+                type="button"
+                className="remove-file-btn"
+                onClick={handleRemoveFile}
+              >
+                Remove
+              </button>
+            </div>
+          </div>
+        )}
+
         {error && <div className="create-error">{error}</div>}
       </form>
     </div>

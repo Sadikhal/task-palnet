@@ -71,8 +71,8 @@
 }
 
 .post-image {
-  max-width: 100%;
-  border-radius: 12px;
+  width: 280px;
+  height: 280px;
   display: block;
 }
 
@@ -188,4 +188,28 @@
 .no-comments {
   color: #777;
   padding: 6px 0;
+}
+
+.photo-file-input { display: none; }
+
+/* preview */
+.upload-preview {
+  display:flex;
+  gap:12px;
+  align-items:center;
+  margin:12px 0;
+  padding:10px;
+  background:#fff;
+  border-radius:10px;
+  border:1px solid #eef1f5;
+}
+.preview-img{ width:120px; height:120px; object-fit:cover; border-radius:8px; }
+.preview-info { display:flex; flex-direction:column; gap:6px; }
+.remove-file-btn {
+  background: transparent;
+  color: #d32f2f;
+  border: 1px solid #f6d0d0;
+  padding:6px 10px;
+  border-radius:8px;
+  cursor:pointer;
 }

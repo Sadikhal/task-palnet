@@ -4,6 +4,7 @@ import { AuthProvider } from "./context/AuthContext";
 import Login from "./routes/Login/Login";
 import Register from "./routes/Register/Register";
 import Feed from "./routes/Feed/Feed";
+import ProtectedRoute from "./components/ProtectectedRoute/ProtectedRoute";
 
 function App() {
   return (
@@ -14,7 +15,14 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/feed" element={<Feed />} />
+          <Route
+            path="/feed"
+            element={
+              <ProtectedRoute>
+                <Feed />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </AuthProvider>

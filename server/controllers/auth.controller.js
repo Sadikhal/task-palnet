@@ -5,9 +5,9 @@ import jwt from 'jsonwebtoken';
 
 const cookieOptions = () => ({
   httpOnly: true,
-  secure: process.env.NODE_ENV === 'production', // secure only in production
+  secure: process.env.NODE_ENV === 'production',
   sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
-  maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+  maxAge: 7 * 24 * 60 * 60 * 1000, 
 });
 
 export const register = async (req, res, next) => {
@@ -74,7 +74,7 @@ export const logOut = (req, res, next) => {
 
 export const getUser = async (req, res, next) => {
   try {
-    const id = req.userId; // set by verifyToken
+    const id = req.userId; 
     if (!id) return next(createError(401, 'Unauthorized'));
 
     const user = await User.findById(id).select('-password');

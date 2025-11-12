@@ -1,9 +1,11 @@
-// src/components/PostCard/PostCard.jsx
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import "./PostCard.css";
 import api from "../../lib/apiRequest";
 import { formatDateTime } from "../../lib/utils";
+import { MdComment } from "react-icons/md";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
+import { FiShare2 } from "react-icons/fi";
 
 const PostCard = ({ post, onLikeToggle, onAddComment }) => {
   const { user } = useContext(AuthContext);
@@ -53,7 +55,12 @@ const PostCard = ({ post, onLikeToggle, onAddComment }) => {
       <div className="post-top">
         <img
           className="avatar"
-          src={post.userId?.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(post.userId?.name||"U")}&background=1976d2&color=fff`}
+          src={
+            post.userId?.avatar ||
+            `https://ui-avatars.com/api/?name=${encodeURIComponent(
+              post.userId?.name || "U"
+            )}&background=1976d2&color=fff`
+          }
           alt="avatar"
         />
         <div className="post-meta">
@@ -61,7 +68,6 @@ const PostCard = ({ post, onLikeToggle, onAddComment }) => {
             <div className="name">{post.userId?.name || "Unknown"}</div>
             <div className="handle">{usernameHandle}</div>
           </div>
-          
           <div className="time">{formatDateTime(post.createdAt)}</div>
         </div>
       </div>
@@ -76,16 +82,38 @@ const PostCard = ({ post, onLikeToggle, onAddComment }) => {
       </div>
 
       <div className="post-actions">
-        <button className="action" onClick={handleLike}>
-          ♥ {likesCount}
-        </button>
-        <button
-          className="action"
-          onClick={() => setShowComments((s) => !s)}
-        >
-          💬 {post.comments?.length || 0}
-        </button>
-        <button className="action share">⤴</button>
+        {/* LIKE BUTTON */}
+        <div>
+          <button
+            className={`action like-btn ${liked ? "liked" : ""}`}
+            onClick={handleLike}
+          >
+            {liked ? (
+              <FaHeart className="icon liked-icon" />
+            ) : (
+              <FaRegHeart className="icon" />
+            )}
+            <span className="number">{likesCount}</span>
+          </button>
+        </div>
+
+        {/* COMMENT BUTTON */}
+        <div>
+          <button
+            className="action"
+            onClick={() => setShowComments((s) => !s)}
+          >
+            <MdComment className="icon" />
+            <span className="number">{post.comments?.length || 0}</span>
+          </button>
+        </div>
+
+        {/* SHARE BUTTON */}
+        <div>
+          <button className="action share">
+            <FiShare2 className="icon" />
+          </button>
+        </div>
       </div>
 
       {showComments && (
@@ -95,7 +123,9 @@ const PostCard = ({ post, onLikeToggle, onAddComment }) => {
               <div key={idx} className="comment">
                 <strong>{c.username}</strong>
                 <span className="comment-text">{c.text}</span>
-                <div className="comment-time">{new Date(c.createdAt).toLocaleString()}</div>
+                <div className="comment-time">
+                  {new Date(c.createdAt).toLocaleString()}
+                </div>
               </div>
             ))
           ) : (

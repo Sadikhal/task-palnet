@@ -3,6 +3,7 @@ import { AuthContext } from "../../context/AuthContext";
 import toast from "react-hot-toast";
 import "./CreatePost.css";
 import api from "../../lib/apiRequest";
+import { HiOutlineCamera } from "react-icons/hi";
 
 const CreatePost = ({ onPostCreated }) => {
   const { user } = useContext(AuthContext);
@@ -55,7 +56,11 @@ const CreatePost = ({ onPostCreated }) => {
         />
         <div className="create-bottom">
           <div className="photo-wrap">
-            <label className="photo-label">📷 Photo</label>
+            <label className="photo-label"><HiOutlineCamera className="camera"/>
+             <span className="photo">
+              Photo
+              </span>
+             </label>
             <input
               className="photo-input"
               placeholder="Image URL (optional)"

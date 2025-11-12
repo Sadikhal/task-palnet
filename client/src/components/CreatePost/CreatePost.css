@@ -47,7 +47,17 @@
   align-items:center;
   gap:10px;
 }
-.photo-label{ color:#1976d2; font-weight:700; cursor:pointer; }
+.photo-label{ color:#1976d2; font-weight:700; cursor:pointer;
+display: flex;
+align-items: center;
+gap: 4px; }
+.camera {
+  height: 20px;
+  width: 20px;
+}
+.photo{
+  font-size: 15px;
+}
 .photo-input{
   padding:8px 10px;
   border-radius:10px;

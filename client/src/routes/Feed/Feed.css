@@ -1,5 +1,7 @@
 /* Feed.css */
-.feed-root{ max-width:800px; margin:0 auto; padding-bottom:80px; font-family: "Helvetica Neue", Arial, sans-serif; }
+.feed-root{ max-width:800px; margin:0 auto; padding-bottom:80px;   font-family: "Lato", sans-serif;
+background: #fff;
+}
 .feed-header{
   display:flex;
   align-items:center;

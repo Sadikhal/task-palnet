@@ -1,4 +1,4 @@
-# 🧠Task Planet Mini Social Post Application  
+# 🧠 Task Planet Mini Social Post Application  
 _A Full Stack Social Feed App built for Internship Skill Evaluation_
 
 ## 📌 Overview
@@ -52,7 +52,7 @@ It demonstrates a complete **MERN stack** implementation with **secure JWT authe
 - React Hot Toast
 - Pure CSS (no Tailwind or MUI)
 - Cloudinary (image upload)
-- Icons: React Icons
+- React Icons
 
 ### Backend
 - Node.js + Express.js
@@ -60,7 +60,6 @@ It demonstrates a complete **MERN stack** implementation with **secure JWT authe
 - JWT Authentication
 - Bcrypt for password hashing
 - CORS, Cookie-Parser, dotenv
-- Rate limiter (optional)
 - Deployed on Render
 
 
@@ -68,7 +67,6 @@ It demonstrates a complete **MERN stack** implementation with **secure JWT authe
 
 ### 📁 Backend
 ```
-
 backend/
 │
 ├── controllers/
@@ -92,12 +90,15 @@ backend/
 │   └── rateLimiter.js
 │
 └── app.js
+<<<<<<< HEAD
 
 
+=======
+```
+>>>>>>> dee47d52c81c45b4146a51f50e995131ee9c3498
 
 ### 📁 Frontend
 ```
-
 frontend/
 │
 ├── src/
@@ -119,16 +120,14 @@ frontend/
 │   ├── App.jsx
 │   ├── index.css
 │   └── main.jsx
-
-````
+```
 
 ---
 
 ## ⚙️ Installation & Setup
 
 ### 🔧 Prerequisites
-Make sure you have installed:
-- Node.js (v18 or higher)
+- Node.js (v18+)
 - MongoDB Atlas account
 - Cloudinary account
 - Git
@@ -137,80 +136,62 @@ Make sure you have installed:
 
 ### 🖥️ Backend Setup
 
-1. Clone the repo:
-   ```bash
-   git clone https://github.com/sadikhal/task-planet.git
-   cd mini-social-app/backend
-````
+```bash
+git clone https://github.com/sadikhal/task-planet.git
+cd task-planet/backend
+npm install
+```
 
-2. Install dependencies:
+Create a `.env` file:
+```env
+MONGO_URL=your_mongodb_connection_string
+JWT_KEY=your_jwt_secret
+CLIENT_URL=http://localhost:5173
+PORT=3002
+```
 
-   ```bash
-   npm install
-   ```
+Run the backend:
+```bash
+node app.js
+```
 
-3. Create `.env` file:
-
-   ```env
-   MONGO_URL=your_mongodb_connection_string
-   JWT_KEY=your_jwt_secret
-   CLIENT_URL=http://localhost:5173
-   PORT=3002
-   ```
-
-4. Run the server:
-
-   ```bash
-   node app.js
-   ```
-
-   The backend will run at `http://localhost:3002`.
+Backend runs at: **http://localhost:3002**
 
 ---
 
 ### 💻 Frontend Setup
 
-1. Go to frontend folder:
+```bash
+cd ../frontend
+npm install
+```
 
-   ```bash
-   cd ../frontend
-   ```
+Create `.env` file:
+```env
+VITE_BASE_URL=http://localhost:3002/api
+VITE_CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
+VITE_CLOUDINARY_UPLOAD_PRESET=your_unsigned_preset
+```
 
-2. Install dependencies:
+Run the frontend:
+```bash
+npm run dev
+```
 
-   ```bash
-   npm install
-   ```
-
-3. Create `.env` file:
-
-   ```env
-   VITE_BASE_URL
-   VITE_CLOUDINARY_URLE=your_cloudinary_url
-   VITE_CLOUDINARY_UPLOAD_PRESET=your_unsigned_preset
-   ```
-
-4. Start the app:
-
-   ```bash
-   npm run dev
-   ```
-
-   The frontend runs at `http://localhost:5173`.
+Frontend runs at: **http://localhost:5173**
 
 ---
 
 ## ☁️ Deployment
 
-* **Frontend** → [Vercel](https://vercel.com) / [Netlify](https://netlify.com)
-* **Backend** → [Render](https://render.com)
-* **Database** → [MongoDB Atlas](https://www.mongodb.com/atlas/database)
-* **Images** → [Cloudinary](https://cloudinary.com)
+- **Frontend** → [Vercel](https://vercel.com) / [Netlify](https://netlify.com)
+- **Backend** → [Render](https://render.com)
+- **Database** → [MongoDB Atlas](https://www.mongodb.com/atlas/database)
+- **Images** → [Cloudinary](https://cloudinary.com)
 
-Make sure your backend CORS allows:
-
+Ensure backend CORS:
 ```js
-origin: [process.env.CLIENT_URL, process.env.DASHBOARD_URL],
+origin: [process.env.CLIENT_URL],
 credentials: true,
 ```
 
@@ -220,55 +201,49 @@ credentials: true,
 
 | Method | Endpoint                    | Description               | Protected |
 | :----- | :-------------------------- | :------------------------ | :-------- |
-| POST   | `/api/auth/register`        | Register new user         | ❌         |
-| POST   | `/api/auth/login`           | Login user                | ❌         |
-| POST   | `/api/auth/logout`          | Logout user               | ✅         |
-| GET    | `/api/posts?page=1&limit=5` | Get all posts (paginated) | ✅         |
-| POST   | `/api/posts`                | Create new post           | ✅         |
-| PUT    | `/api/posts/:id/like`       | Like/Unlike post          | ✅         |
-| POST   | `/api/posts/:id/comment`    | Add comment               | ✅         |
+| POST   | `/api/auth/register`        | Register new user         | ❌ |
+| POST   | `/api/auth/login`           | Login user                | ❌ |
+| POST   | `/api/auth/logout`          | Logout user               | ✅ |
+| GET    | `/api/posts?page=1&limit=5` | Get all posts (paginated) | ✅ |
+| POST   | `/api/posts`                | Create new post           | ✅ |
+| PUT    | `/api/posts/:id/like`       | Like/Unlike post          | ✅ |
+| POST   | `/api/posts/:id/comment`    | Add comment               | ✅ |
 
 ---
 
 ## 🎨 UI Design Inspiration
 
 Inspired by **TaskPlanet App’s Social Page** — modern, clean, and minimal:
-
-* Blue-white color palette
-* Rounded cards & buttons
-* Consistent spacing and shadows
-* Font family: **Lato**
-* Placeholder font: **system-ui, apple-system, Segoe UI**
+- Blue-white color palette
+- Rounded cards & buttons
+- Consistent spacing and shadows
+- Font family: **Lato**
+- Placeholder font: **system-ui, apple-system, Segoe UI**
 
 ---
 
 ## 🧠 Learning Highlights
-
-* Full MERN stack workflow (React + Node + MongoDB)
-* JWT cookie-based authentication
-* REST API integration with frontend
-* Cloudinary image upload with progress
-* Pagination in both frontend & backend
-* Error handling & toast notifications
-* Clean modular project structure
+- Full MERN stack workflow (React + Node + MongoDB)
+- JWT cookie-based authentication
+- REST API integration with frontend
+- Cloudinary image upload with progress
+- Pagination in both frontend & backend
+- Error handling & toast notifications
+- Clean modular project structure
 
 ---
 
 ## ✨ Author
-
-**Sadikhali P V**
-Full Stack Developer – Calicut, Kerala
-📧 [[your.email@sadikhalikvr.com](mailto:your.email@example.com)]
+**Sadikhali P V**  
+Full Stack Developer – Calicut, Kerala  
+📧 [@sadikhalikvr.com](mailto:sadikhalikvr@gmail.com)  
 🌐 [LinkedIn](https://www.linkedin.com/in/sadikhali-p-v-6aa76722a/) | [GitHub](https://github.com/sadikhal)
 
----
 
 ## 🏁 License
-
 This project is open-source and available under the **MIT License**.
 
 ---
 
 ### ⭐ If you like this project, don’t forget to give it a **star** on GitHub!
-
 ```

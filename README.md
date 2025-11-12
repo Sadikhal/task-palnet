@@ -1,13 +1,4 @@
-Absolutely, Sadikh 🙌 — I remember your **entire project structure, backend, frontend, and features** perfectly.
-You built a **Mini Social Post Application** (TaskPlanet-style social feed) as your **Full Stack Internship Project** for HR evaluation — using **React, Node.js, Express, and MongoDB** with authentication, post creation, likes, comments, and Cloudinary image uploads.
-
-Below is your **complete professional `README.md`**, ready for GitHub or submission.
-It includes everything — overview, features, tech stack, setup steps, environment variables, and deployment details.
-
----
-
-```markdown
-# 🧠 Mini Social Post Application  
+# 🧠Task Planet Mini Social Post Application  
 _A Full Stack Social Feed App built for Internship Skill Evaluation_
 
 ## 📌 Overview
@@ -150,7 +141,7 @@ Make sure you have installed:
 
 1. Clone the repo:
    ```bash
-   git clone https://github.com/yourusername/task-palnet.git
+   git clone https://github.com/sadikhal/task-planet.git
    cd mini-social-app/backend
 ````
 

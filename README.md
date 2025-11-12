@@ -1,4 +1,4 @@
-# 🧠 Task Planet Mini Social Post Application  
+# Task Planet Mini Social Post Application  
 _A Full Stack Social Feed App built for Internship Skill Evaluation_
 
 ## 📌 Overview

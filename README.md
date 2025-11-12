@@ -42,7 +42,6 @@ It demonstrates a complete **MERN stack** implementation with **secure JWT authe
 - Pagination support for posts (`/api/posts?page=1&limit=5`)  
 - Error handling via centralized middleware  
 
----
 
 ## 🧩 Tech Stack
 
@@ -64,7 +63,6 @@ It demonstrates a complete **MERN stack** implementation with **secure JWT authe
 - Rate limiter (optional)
 - Deployed on Render
 
----
 
 ## 🗂️ Project Structure
 
@@ -95,7 +93,7 @@ backend/
 │
 └── app.js
 
-```
+
 
 ### 📁 Frontend
 ```

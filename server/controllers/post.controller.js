@@ -29,12 +29,23 @@ export const createPost = async (req, res, next) => {
 
 export const getAllPosts = async (req, res, next) => {
   try {
+    const page = parseInt(req.query.page) || 1; 
+    const limit = parseInt(req.query.limit) || 3; 
+    const skip = (page - 1) * limit;
+
+    const total = await Post.countDocuments();
     const posts = await Post.find()
-      .populate("userId", "name email") 
-      .sort({ createdAt: -1 });
+      .populate("userId", "name email")
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit);
+
     res.status(200).json({
-      message: "All posts fetched successfully",
+      message: "Posts fetched successfully",
       posts,
+      currentPage: page,
+      totalPages: Math.ceil(total / limit),
+      totalPosts: total,
     });
   } catch (err) {
     next(err);
